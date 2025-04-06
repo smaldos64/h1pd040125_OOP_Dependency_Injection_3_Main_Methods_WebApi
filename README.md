@@ -15,3 +15,10 @@ De 3 forskellige måder er :
 3) services.AddSingleton<TInterface, TImplementation>()
    Description: Creates a single instance of the implementation that is shared across the entire application's lifetime.
    Use Cases: Suitable for services that are stateless and thread-safe, such as configuration readers, loggers, or caching services.
+
+Lige en detalje. For at kunne anvende Swagger i et Asp.Net 9 Web Api projekt, skal man lige gå ind i \Properties\LaunchSettings.json filen og indsætte en linje i denne fil. Denne linje er:
+"launchUrl": "swagger",
+Desuden skal man ændre linjen:
+"launchBrowser": false, 
+til:
+"launchBrowser": true,
