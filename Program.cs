@@ -2,28 +2,14 @@ using Dependency_Injection_3_Main_Methods_WebApi.Interfaces;
 using Dependency_Injection_3_Main_Methods_WebApi.Classes;
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 
-//builder.Services.AddControllers();
-
-//builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSingleton<IRequestTransientService, RequestTransientService>();
+builder.Services.AddTransient<IRequestTransientService, RequestTransientService>();
+builder.Services.AddScoped<IRequestScopedService, RequestScopedService>();
+builder.Services.AddSingleton<IRequestSingletonService, RequestSingletonService>();
 
 builder.Services.AddControllers();
-
-//builder.Services.AddCors(options =>  // LTPE
-//{
-//    options.AddPolicy(name: MyAllowSpecificOrigins,
-//        builder => builder.AllowAnyOrigin()
-//        .AllowAnyMethod()
-//        .AllowAnyHeader()
-//        .SetIsOriginAllowed((host) => true));
-//});
-
-//builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c => {  // LTPE
     c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
@@ -40,8 +26,6 @@ app.UseSwagger(); // LTPE
 app.UseSwaggerUI();  // LTPE
 
 app.UseHttpsRedirection();
-
-//app.UseCors(MyAllowSpecificOrigins); // LTPE
 
 app.UseAuthorization();
 
